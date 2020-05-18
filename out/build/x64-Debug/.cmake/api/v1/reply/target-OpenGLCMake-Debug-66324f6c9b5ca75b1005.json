@@ -36,7 +36,7 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 11,
+				"line" : 6,
 				"parent" : 0
 			},
 			{
@@ -99,11 +99,11 @@
 	[
 		{
 			"backtrace" : 2,
-			"id" : "glfw::@fa9f4482d3a2b070f206"
+			"id" : "glad::@f022c46af7fd79d63a94"
 		},
 		{
 			"backtrace" : 2,
-			"id" : "glad::@f022c46af7fd79d63a94"
+			"id" : "glfw::@fa9f4482d3a2b070f206"
 		}
 	],
 	"id" : "OpenGLCMake::@145eef247bfb46b6828c",

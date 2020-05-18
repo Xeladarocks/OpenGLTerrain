@@ -1,5 +1,36 @@
 #include "Shader.h"
 
+const std::string vShaderString = R"(
+    #version 450 core
+
+    layout (location = 0) in vec3 aPos;
+    layout (location = 1) in vec3 aVertexColor;
+
+    out vec3 vColor;
+
+    uniform mat4 model;
+    uniform mat4 view;
+    uniform mat4 projection;
+
+    void main() {
+        gl_Position = projection * view * model * vec4(aPos, 1.0);
+        vColor = aVertexColor;
+        //vColor = vec3(255, 255, 0);
+    }
+)";
+
+const std::string fShaderString = R"(
+    #version 450 core
+
+    in vec3 vColor;
+
+    out vec4 FragColor;
+
+    void main() {
+        FragColor = vec4(vColor, 1.0f);
+    }
+)";
+
 Shader::Shader(const char* vertexPath, const char* fragmentPath) {
     // 1. retrieve the vertex/fragment source code from filePath
     std::string vertexCode;
@@ -34,6 +65,9 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath) {
     catch (std::ifstream::failure& e) {
         std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
         std::cout << "Error: " << e.what() << std::endl;
+
+        vertexCode = vShaderString;
+        fragmentCode = fShaderString;
     }
     const char* vShaderCode = vertexCode.c_str();
     const char* fShaderCode = fragmentCode.c_str();
