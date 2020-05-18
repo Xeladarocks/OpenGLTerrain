@@ -1,0 +1,11 @@
+# ninja log v5
+1	245	611537539	glad-populate-prefix/src/glad-populate-stamp/glad-populate-mkdir	7d63eea3e028a6a2
+245	4611	611537543	glad-populate-prefix/src/glad-populate-stamp/glad-populate-download	e9b50121d5bc078c
+4611	4696	611537543	glad-populate-prefix/src/glad-populate-stamp/glad-populate-patch	33c248cb3d4efbd0
+4613	6484	0	glad-populate-prefix/src/glad-populate-stamp/glad-populate-update	92966241f58f1ce7
+6484	6561	611537545	glad-populate-prefix/src/glad-populate-stamp/glad-populate-configure	d753ed0a6209d7d7
+6561	6628	611537545	glad-populate-prefix/src/glad-populate-stamp/glad-populate-build	ddbb6c542f2725d2
+6628	6695	611537545	glad-populate-prefix/src/glad-populate-stamp/glad-populate-install	d11875d902a48aae
+6696	6762	611537546	glad-populate-prefix/src/glad-populate-stamp/glad-populate-test	dd60f8ffba8b86c
+6762	6857	611537546	CMakeFiles/glad-populate-complete	170062c33207a0d5
+6762	6857	611537546	glad-populate-prefix/src/glad-populate-stamp/glad-populate-done	170062c33207a0d5
