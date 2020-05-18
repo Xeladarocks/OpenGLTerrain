@@ -55,16 +55,3 @@ if(NOT glm_POPULATED)
     include_directories(${glm_SOURCE_DIR})
 endif()
 # -----=     =----- #
-
-# -----= Perlin =----- #
-FetchContent_Declare(
-    perlin                  # Recommendation: Stick close to the original name.
-    GIT_REPOSITORY https://github.com/Reputeless/PerlinNoise
-    SOURCE_DIR perlin/perlin
-)
-FetchContent_GetProperties(perlin)
-if(NOT perlin_POPULATED)
-    FetchContent_Populate(perlin)
-    include_directories(${perlin_SOURCE_DIR}/../)
-endif()
-# -----=        =----- #

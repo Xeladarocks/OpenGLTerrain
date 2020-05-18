@@ -8,7 +8,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/string_cast.hpp>
 
-#include <perlin/perlin.hpp>
+#include "perlin.hpp"
 
 #include "Shader.h"
 #include "Camera.h"

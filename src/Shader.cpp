@@ -47,7 +47,7 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath) {
         if (std::string::npos != last_slash_idx) {
             dir_path = dir_path.substr(0, last_slash_idx);
         }
-        std::cout << dir_path + "\\" + vertexPath << "\n";
+        //std::cout << dir_path + "\\" + vertexPath << "\n";
         // open files
         vShaderFile.open(dir_path + "\\" + vertexPath);
         fShaderFile.open(dir_path + "\\" + fragmentPath);
@@ -63,7 +63,7 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath) {
         fragmentCode = fShaderStream.str();
     }
     catch (std::ifstream::failure& e) {
-        std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
+        std::cout << "WARNING::SHADER::FILE_NOT_SUCCESFULLY_READ::FALLBACK_TO_STRING" << std::endl;
         std::cout << "Error: " << e.what() << std::endl;
 
         vertexCode = vShaderString;
