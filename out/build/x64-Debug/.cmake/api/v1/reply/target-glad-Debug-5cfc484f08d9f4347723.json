@@ -28,6 +28,7 @@
 		"files" : 
 		[
 			"out/build/x64-Debug/extern/glad/CMakeLists.txt",
+			"CMakeLists.txt",
 			"extern/CMakeLists.txt"
 		],
 		"nodes" : 
@@ -53,8 +54,23 @@
 			{
 				"command" : 2,
 				"file" : 1,
-				"line" : 27,
+				"line" : 10,
 				"parent" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 13,
+				"parent" : 3
+			},
+			{
+				"file" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 2,
+				"line" : 27,
+				"parent" : 6
 			},
 			{
 				"command" : 3,
@@ -77,10 +93,18 @@
 			[
 				{
 					"backtrace" : 4,
-					"path" : "C:/dev/c++/OpenGLCMake/out/build/x64-Debug/extern/GLFW/include"
+					"path" : "C:/dev/c++/OpenGLCMake/extern/perlin"
 				},
 				{
 					"backtrace" : 5,
+					"path" : "C:/dev/c++/OpenGLCMake/extern/glm"
+				},
+				{
+					"backtrace" : 7,
+					"path" : "C:/dev/c++/OpenGLCMake/out/build/x64-Debug/extern/GLFW/include"
+				},
+				{
+					"backtrace" : 8,
 					"path" : "C:/dev/c++/OpenGLCMake/out/build/x64-Debug/_deps/glad-build/include"
 				}
 			],

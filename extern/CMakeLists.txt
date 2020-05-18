@@ -41,3 +41,30 @@ if(NOT glad_POPULATED)
     include_directories(${glad_SOURCE_DIR}/include)
 endif()
 # -----=      =----- #
+
+# -----= GLM =----- #
+FetchContent_Declare(
+    glm                  # Recommendation: Stick close to the original name.
+    GIT_REPOSITORY https://github.com/g-truc/glm
+    SOURCE_DIR glm
+)
+FetchContent_GetProperties(glm)
+if(NOT glm_POPULATED)
+    FetchContent_Populate(glm)
+    add_subdirectory(${glm_SOURCE_DIR} ${glm_BINARY_DIR})
+    include_directories(${glm_SOURCE_DIR})
+endif()
+# -----=     =----- #
+
+# -----= Perlin =----- #
+FetchContent_Declare(
+    perlin                  # Recommendation: Stick close to the original name.
+    GIT_REPOSITORY https://github.com/Reputeless/PerlinNoise
+    SOURCE_DIR perlin/perlin
+)
+FetchContent_GetProperties(perlin)
+if(NOT perlin_POPULATED)
+    FetchContent_Populate(perlin)
+    include_directories(${perlin_SOURCE_DIR}/../)
+endif()
+# -----=        =----- #
