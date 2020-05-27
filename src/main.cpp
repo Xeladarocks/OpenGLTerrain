@@ -1,5 +1,8 @@
 #pragma once
 #include <iostream>
+#include <vector>
+#include <time.h>
+#include <iomanip>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -11,9 +14,8 @@
 #include "perlin.hpp"
 
 #include "Shader.h"
-#include "Camera.h"
-#include <vector>
-#include <time.h>
+#include "Camera.hpp"
+#include "util.hpp"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -32,7 +34,7 @@ const int WIDTH = 800;
 const int HEIGHT = 600;
 
 // camera
-Camera camera(glm::vec3(0.0f, 20.0f, 0.0f));
+Camera camera(glm::vec3(0.0f, 50.0f, 0.0f));
 
 float lastX = WIDTH / 2.0f;
 float lastY = HEIGHT / 2.0f;
@@ -44,12 +46,12 @@ float lastFrame = 0.0f;
 
 // perlin
 siv::PerlinNoise perlin(time(0));
-const int frequency = 32;
-const int octaves = 8;
+const int frequency = 64;
+const int octaves = 1;
 
 // map generation
-const float max_y = 5.0f;
-const float peak_scalar = 2.0f; // may go beyond max_y
+float max_y = 25.0f;
+float peak_scalar = 1.2f;
 
 float getNoise(const int &x, const int &z) {
     return std::pow(perlin.accumulatedOctaveNoise2D_0_1(x / (float)frequency, z / (float)frequency, octaves) * max_y, peak_scalar);
@@ -109,13 +111,30 @@ void generateWorld(std::vector<float> &vertices, std::vector<unsigned int> &indi
 
 
             /** Coloring **/
-            float height_color = std::pow(getNoise(x + (float)grid_size, z + (float)grid_size), 1.0f / peak_scalar)/max_y;
-            for(int f = 0; f < 3; f++)
-                push_vec3(colors, glm::vec3(0, height_color, 0.5-height_color));
+            const float saturation = 1;
+            const float value = 1;
 
-            float height_color2 = std::pow(getNoise(x + (tile_size/2.0f) + (float)grid_size, z + (tile_size/2.0f) + (float)grid_size), 1.0f/peak_scalar)/max_y;
+            float y1 = 
+                std::pow(
+                    getNoise(
+                        x + (float)grid_size, 
+                        z + (float)grid_size
+                    ), 
+                    1.0f / peak_scalar
+                )/max_y;
             for (int f = 0; f < 3; f++)
-                push_vec3(colors, glm::vec3(0, height_color2, 0.5-height_color2));
+                push_vec3(colors, HSVtoRGB(300 - y1 * 360, saturation, value));
+
+            float y2 = 
+                std::pow(
+                    getNoise(
+                        x + (tile_size/2.0f) + (float)grid_size, 
+                        z + (tile_size/2.0f) + (float)grid_size
+                    ), 
+                    1.0f/peak_scalar
+                )/max_y;
+            for (int f = 0; f < 3; f++)
+                push_vec3(colors, HSVtoRGB(300 - y2 * 360, saturation, value));
             /** End Coloring **/
         }
     }
@@ -138,6 +157,8 @@ int main() {
         glfwTerminate();
         return -1;
     }
+    GLFWmonitor* monitor = getBestMonitor(window);
+    centerWindow(window, monitor);
     glfwMakeContextCurrent(window);
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         std::cout << "Failed to initialize GLAD" << std::endl;
@@ -243,7 +264,8 @@ int main() {
         glBindVertexArray(VAO);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO); // indices
 
-        // Drawing types: GL_TRIANGLES = normal fill, GL_LINE_STRIP = wireframe
+        glPointSize(5);
+        //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // wireframe
         glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 
         glfwSwapBuffers(window);
